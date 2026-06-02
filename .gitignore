@@ -1,0 +1,6 @@
+work/
+.vscode/
+transcript
+*.wlf
+*.bak
+*.cr.mti

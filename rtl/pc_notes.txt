@@ -1,0 +1,19 @@
+Program Counter
+
+The PC stores the address of the next instruction.
+
+             clk
+              |
+              v
+       +--------------+
+rst -->|              |
+en  -->| Program      |----> pc_out[7:0]
+       | Counter      |
+       +--------------+
+
+State Transition Table
+       | rst | enable | Next PC |
+| --- | ------ | ------- |
+| 1   | X      | 0       |
+| 0   | 0      | Hold    |
+| 0   | 1      | PC + 1  |
