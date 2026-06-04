@@ -63,7 +63,7 @@ initial begin
     #10;
     rst = 1'b0;
 
-    // Write 8'hA5 to R4
+    // Test 1: Write 8'hA5 to R4
     #5;
     wr_en   = 1'b1;
     wr_addr = 3'd4;
@@ -79,6 +79,29 @@ initial begin
         $display("TEST PASSED: R4 = A5");
     else
         $display("TEST FAILED: R4 read incorrect");
+
+    // Test 2: Write 8'h3C to R2
+    #5;
+    wr_en   = 1'b1;
+    wr_addr = 3'd2;
+    wr_data = 8'h3C;
+    #10;
+    wr_en = 1'b0;
+
+    // Simultaneously read R4 and R2
+    rd_addr_a = 3'd4;
+    rd_addr_b = 3'd2;
+    #1;
+
+    if (rd_data_a == 8'hA5)
+        $display("TEST PASSED: Port A reads R4 = A5");
+    else
+        $display("TEST FAILED: Port A R4 read incorrect");
+
+    if (rd_data_b == 8'h3C)
+        $display("TEST PASSED: Port B reads R2 = 3C");
+    else
+        $display("TEST FAILED: Port B R2 read incorrect");
 
     $finish;
 end
