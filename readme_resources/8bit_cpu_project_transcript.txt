@@ -1,0 +1,166 @@
+
+8-BIT CPU PROJECT TRANSCRIPT (CONDENSED ENGINEERING LOG)
+
+PROJECT GOAL
+Design and verify a complete 8-bit CPU in Verilog HDL using a bottom-up approach.
+
+MODULES COMPLETED
+1. Program Counter (PC)
+- 8-bit PC
+- Reset to 0
+- Increment on enable
+
+2. Instruction Memory
+- 256 x 16-bit
+- Asynchronous read
+- Initialized with CPU program
+
+3. Instruction Decoder
+Instruction format:
+[15:12] opcode
+[11:9] rd
+[8:6] rs1
+[5:3] rs2
+[2:0] unused
+
+4. Register File
+- 8 registers (R0-R7)
+- 8-bit width
+- Dual read ports
+- Single write port
+- Preloaded:
+  R1 = 5
+  R2 = 7
+
+5. ALU
+Supported:
+ADD, SUB, AND, OR, XOR, NOT, MOV
+
+Flags:
+- Zero
+- Carry
+- Negative
+
+6. Data Memory
+- 256 x 8-bit
+- Synchronous write
+- Asynchronous read
+
+7. Control Unit
+Supported opcodes:
+0000 ADD
+0001 SUB
+0010 AND
+0011 OR
+0100 XOR
+0101 NOT
+0110 LOAD
+0111 STORE
+1000 MOV
+
+CPU INTEGRATION
+
+Connected:
+PC
+-> Instruction Memory
+-> Instruction Decoder
+-> Control Unit
+-> Register File
+-> ALU
+-> Data Memory
+-> Writeback
+
+WRITEBACK MUX
+
+writeback_data =
+    mem_read ? mem_rd_data : alu_result;
+
+MEMORY VERIFICATION PROGRAM
+
+STORE R1 -> Memory[R2]
+LOAD  R3 <- Memory[R2]
+ADD   R4 = R1 + R3
+
+Initial:
+R1 = 5
+R2 = 7
+
+Execution:
+Memory[7] = 5
+R3 = 5
+R4 = 10
+
+Verified:
+Register -> Memory
+Memory -> Register
+Register -> ALU -> Register
+
+BRANCH UNIT
+
+Supported:
+1001 JMP
+1010 BEQ
+
+Verified:
+PASS JMP
+PASS BEQ TAKEN
+PASS BEQ NOT TAKEN
+PASS INVALID OPCODE
+
+FINAL FEATURES
+
+✓ Program Counter
+✓ Instruction Memory (256x16)
+✓ Instruction Decoder
+✓ Control Unit
+✓ Register File (8x8)
+✓ ALU
+✓ Data Memory (256x8)
+✓ Writeback Mux
+✓ Flags (Z,C,N)
+✓ LOAD
+✓ STORE
+✓ ADD
+✓ SUB
+✓ AND
+✓ OR
+✓ XOR
+✓ NOT
+✓ MOV
+✓ JMP
+✓ BEQ
+
+PROJECT FILES
+
+rtl/
+pc.v
+instruction_memory.v
+instruction_decoder.v
+control_unit.v
+register_file.v
+alu.v
+data_memory.v
+branch_unit.v
+cpu_top.v
+
+tb/
+pc_tb.v
+instruction_memory_tb.v
+register_file_tb.v
+alu_tb.v
+data_memory_tb.v
+control_unit_tb.v
+branch_unit_tb.v
+cpu_top_tb.v
+
+README SHOULD INCLUDE
+
+1. CPU Architecture Diagram
+2. cpu_top.v Integration
+3. CPU Execution Results
+4. Waveforms
+5. ALU Verification
+6. Branch Verification
+
+Suggested Title:
+Design and Verification of an 8-Bit CPU in Verilog HDL
