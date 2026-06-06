@@ -1,6 +1,7 @@
 work/
 .vscode/
 transcript
+tcl_stacktrace.txt
 *.wlf
 *.bak
 *.cr.mti

@@ -32,6 +32,10 @@ always @(posedge clk) begin
         for (i = 0; i < NUM_REGS; i = i + 1) begin
             registers[i] <= {DATA_WIDTH{1'b0}};
         end
+
+        // Preload registers for CPU bring-up testing
+        registers[1] <= 8'd5;  // R1 = 5
+        registers[2] <= 8'd7;  // R2 = 7
     end
 
     else if (wr_en) begin

@@ -1,0 +1,45 @@
+15      12 11      9 8       6 5       3 2       0
++---------+---------+---------+---------+---------+
+| Opcode  |   Rd    |   Rs1   |   Rs2   | Unused  |
++---------+---------+---------+---------+---------+
+
+ 4 bits     3 bits    3 bits    3 bits    3 bits
+
+| Opcode | Instruction |
+| ------ | ----------- |
+| 0000   | ADD         |
+| 0001   | SUB         |
+| 0010   | AND         |
+| 0011   | OR          |
+| 0100   | XOR         |
+| 0101   | NOT         |
+| 0110   | LOAD        |
+| 0111   | STORE       |
+| 1000   | MOV         |
+
+| Instruction | reg_write | mem_write |
+| ----------- | --------- | --------- |
+| ADD         | 1         | 0         |
+| SUB         | 1         | 0         |
+| AND         | 1         | 0         |
+| OR          | 1         | 0         |
+| XOR         | 1         | 0         |
+| NOT         | 1         | 0         |
+| LOAD        | 1         | 0         |
+| STORE       | 0         | 1         |
+| MOV         | 1         | 0         |
+
+LOAD  = memory → register
+STORE = register → memory
+
+| Opcode | Instruction | alu_op | reg_write | mem_read | mem_write |
+| ------ | ----------- | ------ | --------- | -------- | --------- |
+| 0000   | ADD         | 0000   | 1         | 0        | 0         |
+| 0001   | SUB         | 0001   | 1         | 0        | 0         |
+| 0010   | AND         | 0010   | 1         | 0        | 0         |
+| 0011   | OR          | 0011   | 1         | 0        | 0         |
+| 0100   | XOR         | 0100   | 1         | 0        | 0         |
+| 0101   | NOT         | 0101   | 1         | 0        | 0         |
+| 0110   | LOAD        | xxxx   | 1         | 1        | 0         |
+| 0111   | STORE       | xxxx   | 0         | 0        | 1         |
+| 1000   | MOV         | 1000   | 1         | 0        | 0         |
